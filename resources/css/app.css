@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    --color-accent: var(--color-neutral-800);
+    --color-accent-content: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+
+/* --- Estilos para separar las tarjetas y redondear bordes --- */
+@layer components {
+    /* Seleccionamos los contenedores de las tarjetas (Flux Card) */
+    [data-flux-card] {
+        @apply rounded-3xl border-zinc-200 shadow-xl shadow-zinc-200/50 transition-all duration-300;
+        /* Esto les da el borde muy redondeado y una sombra suave */
+    }
+
+    /* En la vista de Categorías, separamos las columnas */
+    .flex.flex-col.lg\:flex-row {
+        @apply gap-10 lg:gap-14; 
+        /* gap-14 da mucho "aire" entre el formulario y la tabla */
+    }
+
+    /* Estilo para los inputs dentro de las tarjetas */
+    input[data-flux-control] {
+        @apply !rounded-2xl !border-zinc-100 !bg-zinc-50/50 py-3;
+    }
+}
+
+/* Espaciado extra para cuando las tarjetas se apilan en el móvil */
+@media (max-width: 1023px) {
+    .flex-col > * + * {
+        margin-top: 2rem;
+    }
+}
+
+@layer components {
+    /* Animación de entrada para las filas de la tabla */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .divide-y > div {
+        animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    /* Tarjetas con efecto de elevación al pasar el mouse */
+    [data-flux-card]:hover {
+        @apply shadow-2xl shadow-indigo-500/5 border-indigo-100/50;
+        transform: translateY(-2px);
+    }
+
+    /* Estilo para el scrollbar (más fino y elegante) */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-zinc-200 rounded-full hover:bg-zinc-300;
+    }
+}
+
+/* --- Mejoras de Diseño Premium --- */
+@layer components {
+    /* Bordes extra redondeados para las tarjetas */
+    [data-flux-card], .custom-card {
+        @apply rounded-[2.5rem] border-zinc-200 shadow-xl shadow-zinc-200/50 transition-all duration-300 bg-white dark:bg-zinc-900;
+    }
+
+    /* Estilo para los campos de texto */
+    input[data-flux-control], .custom-input {
+        @apply !rounded-2xl !border-none !bg-zinc-100/80 dark:!bg-zinc-800 py-3 focus:ring-2 focus:ring-indigo-500 transition-all;
+    }
+
+    /* Animación suave para la aparición de filas */
+    @keyframes fadeInRow {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .category-row {
+        animation: fadeInRow 0.3s ease-out forwards;
+    }
+}
+
+@layer components {
+    /* Forzamos el redondeado y la sombra en las tarjetas */
+    .custom-card-container {
+        @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/40 !rounded-[2.5rem] overflow-hidden !important;
+    }
+
+    /* Redondeado para los inputs */
+    .custom-input-style {
+        @apply !rounded-2xl !border-none !bg-zinc-100 dark:!bg-zinc-800 focus:!ring-2 focus:!ring-indigo-500 !important;
+    }
+}
