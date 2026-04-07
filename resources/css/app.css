@@ -75,7 +75,7 @@ select:focus[data-flux-control] {
 
     /* En la vista de Categorías, separamos las columnas */
     .flex.flex-col.lg\:flex-row {
-        @apply gap-10 lg:gap-14; 
+        @apply gap-10 lg:gap-14;
         /* gap-14 da mucho "aire" entre el formulario y la tabla */
     }
 
@@ -147,11 +147,11 @@ select:focus[data-flux-control] {
 @layer components {
     /* Forzamos el redondeado y la sombra en las tarjetas */
     .custom-card-container {
-        @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/40 !rounded-[2.5rem] overflow-hidden !important;
+        @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/40 !rounded-[2.5rem] overflow-hidden;
     }
 
     /* Redondeado para los inputs */
     .custom-input-style {
-        @apply !rounded-2xl !border-none !bg-zinc-100 dark:!bg-zinc-800 focus:!ring-2 focus:!ring-indigo-500 !important;
+        @apply !rounded-2xl !border-none !bg-zinc-100 dark:!bg-zinc-800 focus:!ring-2 focus:!ring-indigo-500;
     }
 }
